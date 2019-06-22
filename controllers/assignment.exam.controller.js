@@ -33,6 +33,50 @@ var assignmentExamController = function() {
     }).catch(err => {
       return console.log(err);
     });
+
+    const output = `
+        <p>Hi ${req.body.firstName}, </p>
+        <p>Your account has been created</p>
+        <ul>  
+            <li>First Name: ${req.body.firstName}</li>
+            <li>Last Name: ${req.body.lastName}</li>
+            <li>Email Address: ${req.body.email}</li>
+        </ul>
+        <p>Welcome to the team!</p>
+        `;
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      secure: false,
+      auth: {
+        user: "siisystem1@gmail.com",
+        pass: "siisystem74."
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+    // setup email data
+    let mailOptions = {
+      from: '"SII System" <siisystem1@gmail.com>',
+      to: req.body.email,
+      subject: "Welcome to SII",
+      text: "text",
+      html: output
+    };
+
+    // send mail
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log("Message sent: %s", info.messageId);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+      res.status(200).json({ Instructor: "Added and sent mail Successfully" });
+    });
   };
   /**
    * get method to retrieve all data
