@@ -5,13 +5,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-
 const routes = express.Router();
 
 //classes which handles routes
-var adminRouter = require('./Controller/admin.controller');
-var instructorRouter = require('./Controller/instructor.controller');
-var courseRouter = require('./Controller/courseController');
+var adminRouter = require('./controllers/admin.controller');
+var instructorRouter = require('./controllers/instructor.controller');
+var courseRouter = require('./controllers/courseController');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));

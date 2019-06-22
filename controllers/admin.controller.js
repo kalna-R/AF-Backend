@@ -16,8 +16,7 @@ adminRoutes.route("/create").post(function(req, res) {
     if (admins.length >= 1) {
       return res.send({ message: "Username exists" });
     }
-    admin
-      .save()
+    admin.save()
       .then(admin => {
         res.status(200).json({ admin: "Added Successfully" });
       })
@@ -39,11 +38,53 @@ adminRoutes.route("/").get(function(req, res) {
 });
 
 //get admin details by id
-adminRoutes.route("/:id").get(function(req, res) {
-  let id = req.params.id;
-  Admin.findById(id, function(err, admin) {
-    res.json(admin);
-  });
+adminRoutes.route("/:username").get(function(req, res) {
+  let id = req.params.username;
+  Admin.find({username: id})
+    .exec()
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(400).send("Could not find item");
+    });
+});
+
+//update admin details
+adminRoutes.route("/update/:username").put(function(req, res){
+  let id = req.params.username;
+  Admin.find({username: id})
+    .exec()
+    .then(data => {
+
+      if (!data) {
+        res.status(404).send("data is not found");
+      }else{
+        console.log(data);
+        data.username = req.body.username;
+        data.firstName = req.body.firstName;
+        data.lastName = req.body.lastName;
+        data.password = req.body.password;
+        console.log(data);
+      }
+    })
+    .catch(err => {
+      res.status(400).send("Could not find item");
+    });
+});
+
+adminRoutes.route('/:update/username').put(function (req, res) {
+  assignmentExamController.update(req.params.assignmentExamCode, req.body).then(function (data) {
+      res.status(data.status).send(
+          {
+              data: data.message
+          }
+      );
+  }).catch(error => {
+      res.status(error.status).send({
+          message: error.message
+      })
+  })
 });
 
 //delete user details
