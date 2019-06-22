@@ -11,6 +11,9 @@ const routes = express.Router();
 var adminRouter = require('./controllers/admin.controller');
 var instructorRouter = require('./controllers/instructor.controller');
 var courseRouter = require('./controllers/courseController');
+var studentRouter = require('./controllers/student.controller');
+var submissionRouter = require('./controllers/submission.controller');
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -28,6 +31,8 @@ connection.once('open', function(){
 routes.use('/admin', adminRouter);
 routes.use('/instructor', instructorRouter);
 routes.use('/course', courseRouter);
+routes.use('/student', studentRouter);
+routes.use('/submission', submissionRouter);
 
 app.use('/', routes);
 
