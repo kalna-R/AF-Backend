@@ -1,12 +1,10 @@
 const express = require("express");
-let AssignmentExamSchema = require("../models/assignment.exam.model");
+let AssignmentExamSchema = require("../models/assignment.model");
 
-var assignmentExamController = function() {
-  /**
-   * Insert method insert data into the AssignmentExam table
-   */
-  this.insert = function(data) {
-    return new Promise(function(resolve, reject) {
+var assignmentExamController = function () {
+
+  this.insert = function (data) {
+    return new Promise(function (resolve, reject) {
       var assignmentExam = new AssignmentExamSchema({
         assignmentExamCode: data.assignmentExamCode,
         description: data.description,
@@ -34,12 +32,9 @@ var assignmentExamController = function() {
       return console.log(err);
     });
   };
-  /**
-   * get method to retrieve all data
-   */
 
   this.get = () => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       AssignmentExamSchema.find()
         .exec()
         .then(data => {
@@ -56,12 +51,9 @@ var assignmentExamController = function() {
         });
     });
   };
-  /**
-   * getOne method to retrieve data of specified AssignmentExam based on the assignmentExam code
-   */
 
   this.getOne = assignmentExamCode => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       AssignmentExamSchema.find({
         assignmentExamCode: assignmentExamCode
       })
@@ -81,11 +73,8 @@ var assignmentExamController = function() {
     });
   };
 
-  /**
-   * Delete an existing assignmentExam
-   */
   this.deleteOne = id => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       AssignmentExamSchema.remove({
         _id: id
       })
@@ -104,9 +93,6 @@ var assignmentExamController = function() {
         });
     });
   };
-  /**
-   * User can update their profile
-   */
 
   this.update = (assignmentExamCode, data) => {
     var description = JSON.stringify(data.description);
@@ -116,7 +102,7 @@ var assignmentExamController = function() {
     var marks = JSON.stringify(data.marks);
     var deadlineDate = JSON.stringify(data.deadlineDate);
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       AssignmentExamSchema.find({
         assignmentExamCode: assignmentExamCode
       })
@@ -155,7 +141,5 @@ var assignmentExamController = function() {
     });
   };
 };
-/**
- * assignmentExamController() method is exported for the assignmentExamRouter class's use
- */
+
 module.exports = new assignmentExamController();

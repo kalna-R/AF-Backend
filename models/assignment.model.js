@@ -1,4 +1,4 @@
-const mongoose =  require('mongoose');
+const mongoose = require('mongoose');
 
 const AssignmentExamSchema = new mongoose.Schema(
     {
@@ -18,13 +18,13 @@ const AssignmentExamSchema = new mongoose.Schema(
         typeOfExam: {
             type: String,
             trim: true,
-            enum: ['CA','FINAL']
+            enum: ['CA', 'FINAL']
         },
         marks: {
-             type: Number,
-             fullMarks:{
-                type:  Number
-             }
+            type: Number,
+            fullMarks: {
+                type: Number
+            }
         },
         deadlineDate: {
             type: Date,

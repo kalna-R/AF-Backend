@@ -1,10 +1,6 @@
-const assignmentExamController = require('../controllers/assignment.exam.controller');
+const assignmentExamController = require('../controllers/assignment.controller');
 const express = require('express');
 var router = express.Router();
-
-/**
- * Post request call the insert method in assignmentExamController class to insert a new assignmentExam
- */
 
 router.route('/').post(function (req, res) {
     assignmentExamController.insert(req.body).then(function (data) {

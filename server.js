@@ -13,7 +13,9 @@ var instructorRouter = require('./controllers/instructor.controller');
 var courseRouter = require('./controllers/courseController');
 var studentRouter = require('./routes/student.routes');
 var submissionRouter = require('./routes/submission.routes');
-
+var assignmentRouter = require('./routes/assignment.routes');
+var notificationRouter = require('./routes/notification.routes');
+var examRouter = require('./routes/exam.routes');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +35,9 @@ routes.use('/instructor', instructorRouter);
 routes.use('/course', courseRouter);
 routes.use('/student', studentRouter);
 routes.use('/submission', submissionRouter);
+routes.use('/exam', examRouter);
+routes.use('/assignment', assignmentRouter);
+routes.use('/submission', notificationRouter);
 
 app.use('/', routes);
 
